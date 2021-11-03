@@ -1,17 +1,10 @@
 import re
 
 def read_template(path):
-    try:
+    
         file = open(path)
-    except FileNotFoundError:
-        content = "Error: Not found"
-    else:
-        content = file.read()
-        file.close()
-        with open(path) as f:
-            content = f.read().strip('\n')
-    finally:
-        return content
+        return file.read()
+        
 
 def parse_template(text):
     '''
@@ -20,9 +13,9 @@ def parse_template(text):
     '''
 
     regex = re.sub(r'({.*?})',"{}" ,text)
-    result =re.findall(r'\{.*?\}', text)
+    result =re.findall(r'{(.*?)}', text)
     
-    return regex,result
+    return regex,tuple(result)
 
 def merge(template,list):
     return template.format(*list)
@@ -30,11 +23,11 @@ def merge(template,list):
 if __name__ =='__main__':
     print(
     '''
-    ****    *****   ****    ****    ****    ****    ****    ****    ****    ****    ****
-    *                                                                                  *
+    ****    *****   ****    ****    ****    ****    ****    ****    ****    ****    ****    ****
+    *                                                                                          *
     *   Welcome to Madlib Game, You will need to answer some question and just wait the result *
-    *                                                                                  *             
-    ****    *****   ****    ****    ****    ****    ****    ****    ****    ****    ****
+    *                                                                                          *             
+    ****    *****   ****    ****    ****    ****    ****    ****    ****    ****    ****    ****
     '''
     )
 
